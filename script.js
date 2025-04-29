@@ -155,4 +155,16 @@ function atualizarDisplay() {
     if (display) {
       display.value = equacao;
     }
+}
+
+
+function porcentagem(n) {
+    return n / 100;
   }
+
+  function fatorial(n) {
+    console.log(n);5
+    if (n < 0) return NaN;
+    if (n === 0 || n === 1) return 1;
+    return n * fatorial(n - 1);
+  }  
