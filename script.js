@@ -30,9 +30,6 @@ const mapeamentoTeclas = {
 let equacao = "";
 const entrada = document.getElementById('entrada');
 
-
-
-
 document.addEventListener("keydown", function (event) {
     let teclaFisica = event.key;
     const textoTeclaVirtual = mapeamentoTeclas[teclaFisica];
@@ -71,9 +68,6 @@ document.addEventListener("keydown", function (event) {
       tecla.classList.remove("pressionada");
     }, 200);
   }
-
-
-  
 
 
   function validarProximoCaractere(equacaoAtual, novoCaractere) {
@@ -156,3 +150,9 @@ function verificaPossibilidadeMenos(ultimoChar) {
     return true; 
 }
   
+function atualizarDisplay() {
+    const display = document.getElementById("entrada");
+    if (display) {
+      display.value = equacao;
+    }
+  }
