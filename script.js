@@ -71,3 +71,88 @@ document.addEventListener("keydown", function (event) {
       tecla.classList.remove("pressionada");
     }, 200);
   }
+
+
+  
+
+
+  function validarProximoCaractere(equacaoAtual, novoCaractere) {
+    equacaoAtual = String(equacaoAtual || "");
+    const parentesesAbertos = (equacaoAtual.match(/\(/g) || []).length;
+    const parentesesFechados = (equacaoAtual.match(/\)/g) || []).length;
+    const ultimoChar = equacaoAtual.slice(-1);
+
+    if (novoCaractere === '-') {
+        return verificaPossibilidadeMenos(ultimoChar);
+    }
+
+    if (equacaoAtual === "") {
+        return /^[0-9(\-stcr]$/.test(novoCaractere);
+    }
+
+    if (novoCaractere === ')') {
+        return parentesesAbertos > parentesesFechados;
+    }
+
+    if (ultimoChar === '%') {
+        return /^[+\-*\/p)]$/.test(novoCaractere); 
+    }
+
+    if (/[stcr]/.test(ultimoChar)) {
+        return novoCaractere === '(';
+    }
+
+    if (novoCaractere === '.') {
+        const partes = equacaoAtual.split(/[+\-*\/p%()]/);
+        const ultimoNumero = partes[partes.length - 1];
+        return !ultimoNumero.includes('.');
+    }
+
+    if (ultimoChar === '.') {
+        return /^[0-9]$/.test(novoCaractere);
+    }
+    
+    if (novoCaractere === '%') {
+        return /[0-9)]/.test(ultimoChar); 
+    }
+
+    if (/[0-9]/.test(ultimoChar)) {
+        return /^[0-9+\-*\/p%).!]$/.test(novoCaractere);
+    }
+
+    if (/[+\-*\/p%]/.test(ultimoChar)) {
+        return /^[0-9(\-stcr]$/.test(novoCaractere);
+    }
+
+    if (ultimoChar === '(') {
+        return /^[0-9(\-stcr]$/.test(novoCaractere);
+    }
+
+   
+    if (ultimoChar === ')') {
+        return /^[+\-*\/%!p]$/.test(novoCaractere);
+    }
+
+    if (ultimoChar === '!') {
+        return /^[+\-*\/p)]$/.test(novoCaractere);
+    }
+
+    return false;
+}
+
+function verificaPossibilidadeMenos(ultimoChar) {
+    if (/[\/*+p%]/.test(ultimoChar)) {
+      return true;
+    }
+  
+    if (ultimoChar === '(') {
+      return true;
+    }
+  
+    if (ultimoChar === '-') {
+      return false;
+    }
+  
+    return true; 
+}
+  
