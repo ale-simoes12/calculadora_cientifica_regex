@@ -68,7 +68,18 @@ document.addEventListener("keydown", function (event) {
       tecla.classList.remove("pressionada");
     }, 200);
   }
+   
 
+  function adicionaEquacao(teclasVirtuais, textoTeclaVirtual, teclaFisica, event) {
+    for (const tecla of teclasVirtuais) {
+      if (tecla.textContent === textoTeclaVirtual) {
+  
+        equacao += mapeamentoTeclas[teclaFisica];
+        hoverTecla(tecla);
+        return;
+      }
+    }
+  }
 
   function validarProximoCaractere(equacaoAtual, novoCaractere) {
     equacaoAtual = String(equacaoAtual || "");
@@ -176,7 +187,7 @@ function porcentagem(n) {
     if (n === 0 || n === 1) return 1;
     return n * fatorial(n - 1);
   }
-  
+
   function calcularEquacao() {
     if (equacao === "") return;
   
