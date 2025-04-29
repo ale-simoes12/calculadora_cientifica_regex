@@ -167,4 +167,40 @@ function porcentagem(n) {
     if (n < 0) return NaN;
     if (n === 0 || n === 1) return 1;
     return n * fatorial(n - 1);
-  }  
+  }
+  
+  
+  function fatorial(n) {
+    console.log(n);5
+    if (n < 0) return NaN;
+    if (n === 0 || n === 1) return 1;
+    return n * fatorial(n - 1);
+  }
+  
+  function calcularEquacao() {
+    if (equacao === "") return;
+  
+    try {
+      let expr = equacao
+        .replace(/s\(/g, 'Math.sin(')
+        .replace(/c\(/g, 'Math.cos(')
+        .replace(/t\(/g, 'Math.tan(')
+        .replace(/r\(/g, 'Math.sqrt(')
+        .replace(/(\([\d\+\-\*\/\.]+\)|\d+)(\!)/g, 'fatorial($1)')
+        .replace(/p/g, '**')
+        .replace(/%/g, '/100'); 
+  
+      
+      const resultado = new Function(`return ${expr}`)();
+      equacao = resultado.toString();
+      atualizarDisplay();
+  
+    } catch (error) {
+      equacao = "Erro";
+      atualizarDisplay();
+      setTimeout(() => {
+        equacao = "";
+        atualizarDisplay();
+      }, 1000);
+    }
+  }
