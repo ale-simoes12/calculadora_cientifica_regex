@@ -30,9 +30,6 @@ const mapeamentoTeclas = {
 let equacao = "";
 const entrada = document.getElementById('entrada');
 
-
-
-
 document.addEventListener("keydown", function (event) {
     let teclaFisica = event.key;
     const textoTeclaVirtual = mapeamentoTeclas[teclaFisica];
@@ -71,10 +68,18 @@ document.addEventListener("keydown", function (event) {
       tecla.classList.remove("pressionada");
     }, 200);
   }
+   
 
-
+  function adicionaEquacao(teclasVirtuais, textoTeclaVirtual, teclaFisica, event) {
+    for (const tecla of teclasVirtuais) {
+      if (tecla.textContent === textoTeclaVirtual) {
   
-
+        equacao += mapeamentoTeclas[teclaFisica];
+        hoverTecla(tecla);
+        return;
+      }
+    }
+  }
 
   function validarProximoCaractere(equacaoAtual, novoCaractere) {
     equacaoAtual = String(equacaoAtual || "");
@@ -156,3 +161,57 @@ function verificaPossibilidadeMenos(ultimoChar) {
     return true; 
 }
   
+function atualizarDisplay() {
+    const display = document.getElementById("entrada");
+    if (display) {
+      display.value = equacao;
+    }
+}
+
+
+function porcentagem(n) {
+    return n / 100;
+  }
+
+  function fatorial(n) {
+    console.log(n);5
+    if (n < 0) return NaN;
+    if (n === 0 || n === 1) return 1;
+    return n * fatorial(n - 1);
+  }
+  
+  
+  function fatorial(n) {
+    console.log(n);5
+    if (n < 0) return NaN;
+    if (n === 0 || n === 1) return 1;
+    return n * fatorial(n - 1);
+  }
+
+  function calcularEquacao() {
+    if (equacao === "") return;
+  
+    try {
+      let expr = equacao
+        .replace(/s\(/g, 'Math.sin(')
+        .replace(/c\(/g, 'Math.cos(')
+        .replace(/t\(/g, 'Math.tan(')
+        .replace(/r\(/g, 'Math.sqrt(')
+        .replace(/(\([\d\+\-\*\/\.]+\)|\d+)(\!)/g, 'fatorial($1)')
+        .replace(/p/g, '**')
+        .replace(/%/g, '/100'); 
+  
+      
+      const resultado = new Function(`return ${expr}`)();
+      equacao = resultado.toString();
+      atualizarDisplay();
+  
+    } catch (error) {
+      equacao = "Erro";
+      atualizarDisplay();
+      setTimeout(() => {
+        equacao = "";
+        atualizarDisplay();
+      }, 1000);
+    }
+  }
