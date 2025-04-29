@@ -7,3 +7,38 @@ body {
     height: 100vh;
     margin: 0;
   }
+
+
+  calculadora {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    width: 340px;
+  }
+  
+  #entrada {
+    width: 90%;
+    font-size: 1.5rem;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    -webkit-user-drag: none;
+  }
+  
+  .caixaInput{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #resultado {
+    text-align: right;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #333;
+    min-height: 25px;
+  }
+  
