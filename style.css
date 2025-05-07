@@ -97,7 +97,7 @@ body {
 }
 
 #igual {
-  grid-column: span 2;
+  grid-column: span 1;
   background: #0d449c;
   color: white;
 }
